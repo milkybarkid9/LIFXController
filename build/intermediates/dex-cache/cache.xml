@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\Projects\Programming\LIFX_Controller\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="015d5bd2acddfc1a6317f56b08c7e11779910abb">
+        <dex dex="D:\Projects\Programming\LIFX_Controller\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_62b858fd531a6891d9ac6fecac9a46cadbdd7b4e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\James\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="D:\Projects\Programming\LIFX_Controller\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_cabcfe9996f5a0bf6ecacf6e5a03d5f48d6e6d38\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Projects\Programming\LIFX_Controller\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="D:\Projects\Programming\LIFX_Controller\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_36dcc57c0780fcb7b2bcd3c07f21ab166f2449a5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\James\.android\build-cache\7e31f9b27f9088c9b566b0f62778c0fa7b92016a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="D:\Projects\Programming\LIFX_Controller\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b2778b62f3514efd81fd8f26e4b26818552909d4\classes.dex" />
+    </item>
+
+</items>
