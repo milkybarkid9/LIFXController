@@ -1,11 +1,13 @@
 package lifx.lifx_controller;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +29,18 @@ public class MainActivity extends AppCompatActivity {
     private List<LightObj> groups;
     private List<LightObj> locations;
 
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = getApplicationContext();
 
         // init light lists
         lights = new ArrayList<>();
         groups = new ArrayList<>();
         locations = new ArrayList<>();
-        new InitLight("all", allLights).execute();
 
         toggleLightButton = (Button) findViewById(R.id.toggleLightButton);
         toggleLightButton.setOnClickListener(toggleLightButtonHandler);
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             auth = tokenEditText.getText().toString();
             tokenEditText.setText("");
             System.out.println("Got auth token: "+auth);
+            new InitLight("all", allLights).execute();
         }
     };
 
@@ -109,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         protected Integer doInBackground(LightObj... name) {
             lightObj = new LightObj(selector);
             allLights = lightObj;
+            Toast.makeText(context, "Lights initialised", Toast.LENGTH_LONG).show();
             return 0;
         }
     }
