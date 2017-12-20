@@ -14,7 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import static lifx.lifx_controller.MainActivity.auth;
-import static lifx.lifx_controller.MainActivity.baseUrl;
+import static lifx.lifx_controller.MainActivity.BASE_URL;
 
 // an object of light, group or scene
 public class LightObj {
@@ -79,17 +79,17 @@ public class LightObj {
         }
     }
 
-    public String setState(Integer state, String colour, Double brightness, Double duration) {
+    public String setState(Integer power, String colour, Double brightness, Double duration) {
         String body = "{}";
 
         try {
             JSONObject json = new JSONObject();
 
             // power
-            if ( state != null ) {
-                if (state == 0)
+            if ( power != null ) {
+                if (power == 0)
                     json.put("power", "off");
-                if (state == 1)
+                if (power == 1)
                     json.put("power", "on");
             }
 
@@ -116,9 +116,7 @@ public class LightObj {
             response = request("lights/"+selector+"/state", "PUT", new Pair<>("Authorization", "Bearer "+auth), body); //TODO: change all to id
             JSONObject item = new JSONObject(response.getReponse());
             return item.getString("status");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
 
@@ -126,7 +124,7 @@ public class LightObj {
     }
 
     private HTTPResponse request(String endpoint, String type, Pair header) throws IOException{
-        String url = baseUrl+endpoint;
+        String url = BASE_URL +endpoint;
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -154,7 +152,7 @@ public class LightObj {
     }
 
     private HTTPResponse request(String endpoint, String type, Pair header, String body) throws IOException{
-        String url = baseUrl+endpoint;
+        String url = BASE_URL +endpoint;
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();

@@ -1,7 +1,11 @@
 package lifx.lifx_controller;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String baseUrl="https://api.lifx.com/v1/";
+    public static final String BASE_URL = "https://api.lifx.com/v1/";
+    public static final String PREFS_NAME = "LightFXPrefs";
     public static String auth;
 
     private Button toggleLightButton;
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private List<LightObj> locations;
 
     private Context context;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
         submitTokenButton.setOnClickListener(submitTokenButtonHandler);
 
         tokenEditText = (EditText) findViewById(R.id.tokenEditText);
+
+        handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message message) {
+                Toast.makeText(context, message.obj.toString(), Toast.LENGTH_LONG).show();
+            }
+        };
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        auth = settings.getString("auth", "");
+        handler.obtainMessage(0,0, 0,"auth="+auth).sendToTarget();
     }
 
     private int getLightIndex(String selector, List<LightObj> lightObjs){
@@ -97,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
             tokenEditText.setText("");
             System.out.println("Got auth token: "+auth);
             new InitLight("all", allLights).execute();
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("auth", auth);
+            editor.apply();
         }
     };
 
@@ -114,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         protected Integer doInBackground(LightObj... name) {
             lightObj = new LightObj(selector);
             allLights = lightObj;
-            Toast.makeText(context, "Lights initialised", Toast.LENGTH_LONG).show();
+            handler.obtainMessage(0,0, 0,"Lights initialised").sendToTarget();
             return 0;
         }
     }
